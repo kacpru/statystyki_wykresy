@@ -1,5 +1,5 @@
 
-var dane = [ { user1: { answer: 4, time: 3, score: -10 },
+let dane = [ { user1: { answer: 4, time: 3, score: -10 },
   user2: { answer: 3, time: 14, score: 46 },
   user3: { answer: 2, time: 11, score: -36 },
   user4: { answer: 1, time: 22, score: -73 },
@@ -49,7 +49,7 @@ var dane = [ { user1: { answer: 4, time: 3, score: -10 },
   user8: { answer: 2, time: 8, score: 26 } } ]
 
 
-var dane2 = [
+let dane2 = [
 	{
 		"t": [
 			"quizspotter"
@@ -153,34 +153,34 @@ var dane2 = [
 google.charts.load('current', {
   callback: function () {
 
-    var keyNames = Object.keys(dane[0]);
+    let keyNames = Object.keys(dane[0]);
     //console.log(keyNames); [ "user1", "user2", "user3", "user4", "user5", "user6", "user7", "user8" ] ilosc graczy
-  
-    var keyNamesDane = Object.keys(dane)
+
+    let keyNamesDane = Object.keys(dane)
     //console.log(keyNamesDane); [ "0", "1", "2" ] ilosc pytan
     
-    for(var j=0;j<keyNamesDane.length;j++){
-    var tablicaOdpowiedzi=[];
-    var tablica=[];         //tablica z odpowiedziami dla kazdego pytania
-    var titleArray=[]      //tablica z jednym zadanym pytaniem dla kazdego pytania
+    for(let j=0;j<keyNamesDane.length;j++){
+    let tablicaOdpowiedzi=[];
+    let tablica=[];         //tablica z odpowiedziami dla kazdego pytania
+    let titleArray=[]      //tablica z jednym zadanym pytaniem dla kazdego pytania
     titleArray.push(dane2[j].q) 
     tablicaOdpowiedzi.push(dane2[j].a) 
 
-    for(var i=1;i<keyNames.length+1;i++){
+    for(let i=1;i<keyNames.length+1;i++){
         tablica.push(dane[j]["user"+[i]]["answer"])  //tablica z odpowiedziami dla kazdego pytania
     console.log(dane2[j].q)
     }
     // console.log(tablica); [ 2, 4, 2, 0, 3, 2, 4 ]
-    var odpA =[];
-    var odpB =[];
-    var odpC =[];
-    var odpD =[];
-    var noAnswer=[];
+    let odpA =[];
+    let odpB =[];
+    let odpC =[];
+    let odpD =[];
+    let noAnswer=[];
 console.log(tablicaOdpowiedzi);     
 console.log(titleArray)
   
 function wykres(){                         //funkcja sprawdzajaca jakie odp sa w tablicy
-for(var i=0;i<tablica.length;i++){
+for(let i=0;i<tablica.length;i++){
     if(tablica[i]===1){
     odpA.push(tablica[i]);
     }
@@ -199,7 +199,7 @@ for(var i=0;i<tablica.length;i++){
 }
 wykres();
 //WYKRESY Z PODANA LICZBA ODP
-    var data = new google.visualization.DataTable();
+    let data = new google.visualization.DataTable();
     data.addColumn('string', 'Topping');
     data.addColumn('number');
     data.addColumn( {type: 'number', role: 'annotation' });
@@ -212,7 +212,7 @@ wykres();
     [tablicaOdpowiedzi[0][3], odpD.length,odpD.length,"red"], 
     ['no answer', noAnswer.length,noAnswer.length,"grey"]
     ]);
-    var options = {
+    let options = {
       seriesType: 'bars',
       hAxis: {
         viewWindow: {
@@ -228,23 +228,23 @@ wykres();
       legend: {position: 'none'},
       // series: {5: {type: 'line'}} 
     };  
-      var container = document.getElementById('piechart').appendChild(document.createElement('div'));
-      var chart = new google.visualization.BarChart(container);
+      let container = document.getElementById('piechart').appendChild(document.createElement('div'));
+      let chart = new google.visualization.BarChart(container);
       chart.draw(data, options);
   }
 // KONIEC WYKRESÓW
 
 //TABELE DLA "NAJWIECEJ ZŁYCH ODP","NAJWIECEJ DOBRYCH ODB" I "NAJWIEKSZA ILOSC BRAKU ODP"
-var badAnswerTable=[];
-var goodAnswerTable=[];
-var zeroAnswerTable=[];
-var bledneOdpowiedzi=[]
+let badAnswerTable=[];
+let goodAnswerTable=[];
+let zeroAnswerTable=[];
+let bledneOdpowiedzi=[]
 //dla każdego pytania umieszczony "score" w tablicy
-for(var j=0;j<keyNamesDane.length;j++){
-  var badAnswer=[];
-  var goodAnswer=[];
-  var zeroAnswer=[];
-  for(var i=1;i<keyNames.length+1;i++){
+for(let j=0;j<keyNamesDane.length;j++){
+  let badAnswer=[];
+  let goodAnswer=[];
+  let zeroAnswer=[];
+  for(let i=1;i<keyNames.length+1;i++){
     if((dane[j]["user"+[i]]["score"])<0){
        badAnswer.push((dane[j]["user"+[i]]["answer"]))
     } else if((dane[j]["user"+[i]]["score"])>0){
@@ -264,11 +264,11 @@ for(var j=0;j<keyNamesDane.length;j++){
 console.log(bledneOdpowiedzi)
 
 //NAJSZYBSZE PYTANIE
-var fastestQuestionTableAvg=[];
+let fastestQuestionTableAvg=[];
 
-for(var j=0;j<keyNamesDane.length;j++){
-  var fastestQuestionTable=[];
-  for(var i=1;i<keyNames.length+1;i++){
+for(let j=0;j<keyNamesDane.length;j++){
+  let fastestQuestionTable=[];
+  for(let i=1;i<keyNames.length+1;i++){
   fastestQuestionTable.push((dane[j]["user"+[i]]["time"]))
   }
 console.log(fastestQuestionTable);   
@@ -276,11 +276,11 @@ console.log(fastestQuestionTable);
 
 
 
-var total = 0;
-for(var i = 0; i < fastestQuestionTable.length; i++) {
+let total = 0;
+for(let i = 0; i < fastestQuestionTable.length; i++) {
     total += fastestQuestionTable[i];
 }
-var avg = total / fastestQuestionTable.length;  //liczenie średniej
+let avg = total / fastestQuestionTable.length;  //liczenie średniej
 fastestQuestionTableAvg.push(avg);
 console.log(avg)
 }
@@ -288,20 +288,20 @@ console.log(fastestQuestionTableAvg)
 
 //NAJSZYBSZY GRACZ
 
-var fastestPlayerTable=[]
-for(var j=0;j<keyNamesDane.length;j++){
-  var fastestPlayer=[];
-  for(var i=1;i<keyNames.length+1;i++){
+let fastestPlayerTable=[]
+for(let j=0;j<keyNamesDane.length;j++){
+  let fastestPlayer=[];
+  for(let i=1;i<keyNames.length+1;i++){
   fastestPlayer.push(dane[j]["user"+[i]]["time"])
   }
   fastestPlayerTable.push(fastestPlayer)
 }
 console.log(fastestPlayerTable)
-var nowaTablica2=[]
+let nowaTablica2=[]
 
-for(var i=0;i<keyNames.length;i++){
-var newScore=0
-for(var j=0;j<keyNamesDane.length;j++){
+for(let i=0;i<keyNames.length;i++){
+let newScore=0
+for(let j=0;j<keyNamesDane.length;j++){
   newScore+= fastestPlayerTable[j][i]
 console.log(newScore)
 
@@ -315,7 +315,7 @@ console.log(nowaTablica2)
 
 }
 console.log(nowaTablica2)
-var avgPlayer=nowaTablica2.map(function(x){
+let avgPlayer=nowaTablica2.map(function(x){
   return x/keyNames.length
 });
 
@@ -323,29 +323,29 @@ console.log(avgPlayer)
 
 //FUNKCJA DO SORTOWANIA WYNIKOW
 function sorting(newAnswerTable,){
-  var newArray = []
-  for(var i=0;i<newAnswerTable.length;i++){
+  let newArray = []
+  for(let i=0;i<newAnswerTable.length;i++){
     newArray.push(dane2[i].q)          //tworzymy tablice "newArray"w zaleznosci od liczby pytan["pytanie 1","pytanie 2"itd]
   }
   // console.log(arrayLabel)
-  var newArrayOfObj = newArray.map(function(d, i) {   //sortujemy tablice od najwiekszej
+  let newArrayOfObj = newArray.map(function(d, i) {   //sortujemy tablice od najwiekszej
     return {
       label: d,
       data: newAnswerTable[i] || 0
     };
   });
-  var sortedNewArrayOfObj = newArrayOfObj.sort(function(a, b) {  
+  let sortedNewArrayOfObj = newArrayOfObj.sort(function(a, b) {  
     return b.data>a.data;
   });
-  var newArrayLabel = [];
-  var newArrayData = [];
+  let newArrayLabel = [];
+  let newArrayData = [];
   sortedNewArrayOfObj.forEach(function(d){
     newArrayLabel.push(d.label);
     newArrayData.push(d.data);
   });
   // console.log(newArrayLabel);
   // console.log(newArrayData);
-  var mixNewArray = newArrayLabel.map(function (x, i) {   //polaczenie obu tablic
+  let mixNewArray = newArrayLabel.map(function (x, i) {   //polaczenie obu tablic
     return [x, newArrayData[i]] 
   });
   // console.log(mixNewArray)
@@ -358,41 +358,41 @@ function sorting(newAnswerTable,){
 
 //FUNKCJA DO SORTOWANIA najszybszych graczy
 function sortingPlayer(newAnswerTable,){
-  var newArray = []
-  for(var i=0;i<newAnswerTable.length;i++){
+  let newArray = []
+  for(let i=0;i<newAnswerTable.length;i++){
     newArray.push("player"+[i+1])          //tworzymy tablice w zaleznosci od liczby pytan["pytanie 1","pytanie 2"itd]
   }
   
-  var newArrayOfObj = newArray.map(function(d, i) {   //sortujemy tablice od najwiekszej
+  let newArrayOfObj = newArray.map(function(d, i) {   //sortujemy tablice od najwiekszej
     return {
       label: d,
       data: newAnswerTable[i] || 0
     };
   });
-  var sortedNewArrayOfObj = newArrayOfObj.sort(function(a, b) {  
+  let sortedNewArrayOfObj = newArrayOfObj.sort(function(a, b) {  
     return b.data<a.data;
   });
-  var newArrayLabel = [];
-  var newArrayData = [];
+  let newArrayLabel = [];
+  let newArrayData = [];
   sortedNewArrayOfObj.forEach(function(d){
     newArrayLabel.push(d.label);
     newArrayData.push(d.data);
   });
   // console.log(newArrayLabel);
   // console.log(newArrayData);
-  var mixNewArray = newArrayLabel.map(function (x, i) {   //polaczenie obu tablic
+  let mixNewArray = newArrayLabel.map(function (x, i) {   //polaczenie obu tablic
     return [x, newArrayData[i]] 
   });
   // console.log(mixNewArray)
   return mixNewArray
 }
 //znajduje 'mf'= ile razy wystepuje najxczestsza bledna odpowiedz
-for(var k=0;k<bledneOdpowiedzi.length;k++){
-  var mf = 1;
-var m = 0;
-var item;
-  for (var i = 0; i < bledneOdpowiedzi[k].length; i++) {
-    for (var j = i; j < bledneOdpowiedzi[k].length; j++) {
+for(let k=0;k<bledneOdpowiedzi.length;k++){
+  let mf = 1;
+let m = 0;
+let item;
+  for (let i = 0; i < bledneOdpowiedzi[k].length; i++) {
+    for (let j = i; j < bledneOdpowiedzi[k].length; j++) {
       if (bledneOdpowiedzi[k][i] == bledneOdpowiedzi[k][j]) m++;
       if (mf < m) {
         mf = m;
@@ -407,8 +407,8 @@ var item;
 //console.log(bledneOdpowiedzi)
 
 // wskazuje jakie bledne odpowiedzi sie pojawialy najczesciej
-var mostFrequentTable=[];
-for(var k=0;k<bledneOdpowiedzi.length;k++){
+let mostFrequentTable=[];
+for(let k=0;k<bledneOdpowiedzi.length;k++){
 
   let counts = bledneOdpowiedzi[k].reduce((a, c) => {
     a[c] = (a[c] || 0) + 1;
@@ -425,24 +425,24 @@ console.log(mostFrequentTable)
 function sortingBadAnswer(newAnswerTable,){
  
   
-  var newArrayOfObj = badAnswerTable.map(function(d, i) {   //sortujemy tablice od najwiekszej
+  let newArrayOfObj = badAnswerTable.map(function(d, i) {   //sortujemy tablice od najwiekszej
     return {
       label: d,
       data: badAnswerTable[i] || 0
     };
   });
-  var sortedNewArrayOfObj = newArrayOfObj.sort(function(a, b) {  
+  let sortedNewArrayOfObj = newArrayOfObj.sort(function(a, b) {
     return b.data>a.data;
   });
-  var newArrayLabel = [];
-  var newArrayData = [];
+  let newArrayLabel = [];
+  let newArrayData = [];
   sortedNewArrayOfObj.forEach(function(d){
     newArrayLabel.push(d.label);
     newArrayData.push(d.data);
   });
   //console.log(newArrayLabel);
   //console.log(newArrayData);
-  var mixNewArray = newArrayLabel.map(function (x, i) {   //polaczenie obu tablic
+  let mixNewArray = newArrayLabel.map(function (x, i) {   //polaczenie obu tablic
     return [x, mostFrequentTable[i]] 
   });
   // console.log(mixNewArray)
@@ -463,31 +463,31 @@ sorting(fastestQuestionTableAvg);
 sortingPlayer(avgPlayer);
 
 //FUNKCJA DO SORTOWANIA błedne odpowiedzi 2
-var sorting2=sorting(badAnswerTable);
-for(var i=0;i<sorting(badAnswerTable).length;i++){
+let sorting2=sorting(badAnswerTable);
+for(let i=0;i<sorting(badAnswerTable).length;i++){
 sorting2[i].push((sorting(badAnswerTable)[i][1]).toString())
 }
 
 //FUNKCJA DO SORTOWANIA poprawne odpowiedzi 2
-var sorting3=sorting(goodAnswerTable);
-for(var i=0;i<sorting(goodAnswerTable).length;i++){
+let sorting3=sorting(goodAnswerTable);
+for(let i=0;i<sorting(goodAnswerTable).length;i++){
 sorting3[i].push((sorting(goodAnswerTable)[i][1]).toString())
 }
 
 //FUNKCJA DO SORTOWANIA brak odpowiedzi 2
-var sorting4=sorting(zeroAnswerTable);
-for(var i=0;i<sorting(zeroAnswerTable).length;i++){
+let sorting4=sorting(zeroAnswerTable);
+for(let i=0;i<sorting(zeroAnswerTable).length;i++){
 sorting4[i].push((sorting(zeroAnswerTable)[i][1]).toString())
 }
 
 //FUNKCJA DO SORTOWANIA najszybszych odpowiedzi 2
-var sorting5=sorting(fastestQuestionTableAvg);
-for(var i=0;i<sorting(fastestQuestionTableAvg).length;i++){
+let sorting5=sorting(fastestQuestionTableAvg);
+for(let i=0;i<sorting(fastestQuestionTableAvg).length;i++){
 sorting5[i].push((sorting(fastestQuestionTableAvg)[i][1]).toString())
 }
 //FUNKCJA DO SORTOWANIA najszybszych graczy 2
-var sorting6=sortingPlayer(avgPlayer);
-for(var i=0;i<sortingPlayer(avgPlayer).length;i++){
+let sorting6=sortingPlayer(avgPlayer);
+for(let i=0;i<sortingPlayer(avgPlayer).length;i++){
 sorting6[i].push((sortingPlayer(avgPlayer)[i][1]).toString())
 }
 
@@ -495,14 +495,14 @@ sorting6[i].push((sortingPlayer(avgPlayer)[i][1]).toString())
 console.log(sorting2);
 
 // WYKRES NAJWIECEJ POPRAWNYCH ODPOWIEDZI
-var data3 = new google.visualization.DataTable();
+let data3 = new google.visualization.DataTable();
 data3.addColumn('string', 'Topping');
 data3.addColumn('number');
 data3.addColumn( {type: 'string', role: 'annotation' });
 
 data3.addRows(sorting3);
 
-var options = {
+let options3 = {
   title:'Najwiecej poprawnych odpowiedzi',
   legend: {position: 'none'},
   hAxis: {
@@ -517,19 +517,19 @@ var options = {
   height:450
 };
 
-  var container3 = document.getElementById('draw-charts').appendChild(document.createElement('div'));
-  var chart3 = new google.visualization.BarChart(container3);
-  chart3.draw(data3, options);
+  let container3 = document.getElementById('draw-charts').appendChild(document.createElement('div'));
+  let chart3 = new google.visualization.BarChart(container3);
+  chart3.draw(data3, options3);
 
 // WYKRES najszybszy gracz
-var data6 = new google.visualization.DataTable();
+let data6 = new google.visualization.DataTable();
 data6.addColumn('string', 'Topping');
 data6.addColumn('number');
 data6.addColumn( {type: 'string', role: 'annotation' });
 
 data6.addRows(sorting6);
 
-var options = {
+let options6 = {
   title:'Najszybszy gracz',
   legend: {position: 'none'},
   allowHtml: true,
@@ -544,18 +544,18 @@ var options = {
   height:450,
   
 };
-  var container6 = document.getElementById('draw-charts').appendChild(document.createElement('div'));
-  var chart6 = new google.visualization.BarChart(container6);
-  chart6.draw(data6, options);  
+  let container6 = document.getElementById('draw-charts').appendChild(document.createElement('div'));
+  let chart6 = new google.visualization.BarChart(container6);
+  chart6.draw(data6, options6);
   
 // WYKRES PYTAN Z NAJWIEKSZA brak odp
-var data4 = new google.visualization.DataTable();
+let data4 = new google.visualization.DataTable();
 data4.addColumn('string', 'Topping');
 data4.addColumn('number');
 data4.addColumn( {type: 'string', role: 'annotation' });
 
 data4.addRows(sorting4);
-var options = {
+let options4= {
   
   title:'Brak odpowiedzi',
   legend: {position: 'none'},
@@ -570,18 +570,18 @@ var options = {
   height:450
 };
 
-  var container4 = document.getElementById('draw-charts').appendChild(document.createElement('div'));
-  var chart4 = new google.visualization.BarChart(container4);
-  chart4.draw(data4, options);
+  let container4 = document.getElementById('draw-charts').appendChild(document.createElement('div'));
+  let chart4 = new google.visualization.BarChart(container4);
+  chart4.draw(data4, options4);
 // WYKRES najszybszych odpowiedzi
-var data5 = new google.visualization.DataTable();
+let data5 = new google.visualization.DataTable();
 data5.addColumn('string', 'Topping','width:500px');
 data5.addColumn('number');
 data5.addColumn( {type: 'string', role: 'annotation' });
 data5.addRows(sorting5);
 
 data5.setProperty(0, 0, 'style', 'width:500px');
-var options = {
+let options5 = {
   title:'Najszybsze odpowiedzi',
   legend: {position: 'none'},
   allowHtml: true,
@@ -597,17 +597,17 @@ var options = {
   height:450
 };
 
-  var container5 = document.getElementById('draw-charts').appendChild(document.createElement('div'));
-  var chart5 = new google.visualization.BarChart(container5);
-  chart5.draw(data5, options);
+  let container5 = document.getElementById('draw-charts').appendChild(document.createElement('div'));
+  let chart5 = new google.visualization.BarChart(container5);
+  chart5.draw(data5, options5);
 
 // WYKRES PYTAN Z NAJWIEKSZA LICZBA BLEDOW
-var data2 = new google.visualization.DataTable();
+let data2 = new google.visualization.DataTable();
 data2.addColumn('string', 'Topping');
 data2.addColumn('number');
 data2.addColumn( {type: 'string', role: 'annotation' });
 data2.addRows(sorting2);
-var options = {
+let options2 = {
   title:'Najwiecej błędnych odpowiedzi',
   legend: {position: 'none'},
   hAxis: {
@@ -621,9 +621,9 @@ var options = {
   height:450
 };
 
-  var container2 = document.getElementById('draw-charts').appendChild(document.createElement('div'));
-  var chart2 = new google.visualization.BarChart(container2);
-  chart2.draw(data2, options);
+  let container2 = document.getElementById('draw-charts').appendChild(document.createElement('div'));
+  let chart2 = new google.visualization.BarChart(container2);
+  chart2.draw(data2, options2);
 
 
 // KONIEC WYKRESÓW
